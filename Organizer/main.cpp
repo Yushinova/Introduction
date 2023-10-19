@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <time.h>
 #include<Windows.h>
 #include<conio.h>
@@ -23,7 +23,7 @@ void setColor(Color text, Color background)
 enum Direction { Up = 72, Left = 75, Right = 77, Down = 80, Spase = 32, Enter = 13, esc = 27 };
 void setCursor(int x, int y)
 {
-	COORD myCoords = { x,y };//инициализируем передаваемыми значениями объект координат
+	COORD myCoords = { x,y };//РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РїРµСЂРµРґР°РІР°РµРјС‹РјРё Р·РЅР°С‡РµРЅРёСЏРјРё РѕР±СЉРµРєС‚ РєРѕРѕСЂРґРёРЅР°С‚
 	SetConsoleCursorPosition(hStdOut, myCoords);
 }
 struct User
@@ -46,7 +46,7 @@ class Event
 	myTime begin_event;
 	myTime end_event;
 	string name_event;
-	int priority;//-1 прошедшие 1-текущие 2-будущие 3- постоянные праздники
+	int priority;//-1 РїСЂРѕС€РµРґС€РёРµ 1-С‚РµРєСѓС‰РёРµ 2-Р±СѓРґСѓС‰РёРµ 3- РїРѕСЃС‚РѕСЏРЅРЅС‹Рµ РїСЂР°Р·РґРЅРёРєРё
 public:
 	Event()
 	{
@@ -66,7 +66,7 @@ public:
 		end_event.minute = end_minute;
 		priority = prior;
 	}
-	Event(const Event& right)//копирование
+	Event(const Event& right)//РєРѕРїРёСЂРѕРІР°РЅРёРµ
 	{
 		name_event = right.name_event;
 		begin_event.hour = right.begin_event.hour;
@@ -77,7 +77,7 @@ public:
 	}
 	~Event()
 	{
-		//cout << "Событие удалено!" << endl;
+		//cout << "РЎРѕР±С‹С‚РёРµ СѓРґР°Р»РµРЅРѕ!" << endl;
 	}
 	void setName(string name)
 	{
@@ -160,7 +160,7 @@ class myDay
 	int day;
 	int month;
 	int year;
-	vector <Event> day_events;//в вектор дней будут добавляться события всего дня
+	vector <Event> day_events;//РІ РІРµРєС‚РѕСЂ РґРЅРµР№ Р±СѓРґСѓС‚ РґРѕР±Р°РІР»СЏС‚СЊСЃСЏ СЃРѕР±С‹С‚РёСЏ РІСЃРµРіРѕ РґРЅСЏ
 public:
 	myDay()//
 	{
@@ -211,19 +211,19 @@ public:
 	{
 		return year;
 	}
-	int getPriorityD(int index) const//приоритет по индексу
+	int getPriorityD(int index) const//РїСЂРёРѕСЂРёС‚РµС‚ РїРѕ РёРЅРґРµРєСЃСѓ
 	{
 		if (day_events.size() > 0)
 		{
 			return day_events[index].getPriority();
 		}
 	}
-	int getPriority(myDay obj)//возвращает день в году для объекта типа myDay
+	int getPriority(myDay obj)//РІРѕР·РІСЂР°С‰Р°РµС‚ РґРµРЅСЊ РІ РіРѕРґСѓ РґР»СЏ РѕР±СЉРµРєС‚Р° С‚РёРїР° myDay
 	{
-		time_t current_time;//милисекунды
+		time_t current_time;//РјРёР»РёСЃРµРєСѓРЅРґС‹
 		time(&current_time);
-		tm mytime_proverka;//структура для хранения текущей даты
-		localtime_s(&mytime_proverka, &current_time);//расчленяем на поля
+		tm mytime_proverka;//СЃС‚СЂСѓРєС‚СѓСЂР° РґР»СЏ С…СЂР°РЅРµРЅРёСЏ С‚РµРєСѓС‰РµР№ РґР°С‚С‹
+		localtime_s(&mytime_proverka, &current_time);//СЂР°СЃС‡Р»РµРЅСЏРµРј РЅР° РїРѕР»СЏ
 		mytime_proverka.tm_mday = obj.getDay();
 		mytime_proverka.tm_mon = obj.getMonth();
 		mytime_proverka.tm_year = obj.getYear() - 1900;
@@ -262,24 +262,24 @@ public:
 	{
 		return *this;
 	}
-	void pushEvent(string name, int begin_hour, int begin_minute, int end_hour, int end_minute, int prior)//добавить событие в вектор дня одного
+	void pushEvent(string name, int begin_hour, int begin_minute, int end_hour, int end_minute, int prior)//РґРѕР±Р°РІРёС‚СЊ СЃРѕР±С‹С‚РёРµ РІ РІРµРєС‚РѕСЂ РґРЅСЏ РѕРґРЅРѕРіРѕ
 	{
 		Event obj(name, begin_hour, begin_minute, end_hour, end_minute, prior);
 		day_events.push_back(obj);
 	}
-	void pushEvent(Event obj)//добавить события уже созданное
+	void pushEvent(Event obj)//РґРѕР±Р°РІРёС‚СЊ СЃРѕР±С‹С‚РёСЏ СѓР¶Рµ СЃРѕР·РґР°РЅРЅРѕРµ
 	{
 		day_events.push_back(obj);
 	}
-	//метод удаления событий
-	void dellEvent(int index)//из вектора событий дня одного
+	//РјРµС‚РѕРґ СѓРґР°Р»РµРЅРёСЏ СЃРѕР±С‹С‚РёР№
+	void dellEvent(int index)//РёР· РІРµРєС‚РѕСЂР° СЃРѕР±С‹С‚РёР№ РґРЅСЏ РѕРґРЅРѕРіРѕ
 	{
 		if (day_events.size() > 0)
 		{
 			day_events.erase(day_events.begin() + index);
 		}
 	}
-	//метод сортировки по времени в векторе событий одного дня
+	//РјРµС‚РѕРґ СЃРѕСЂС‚РёСЂРѕРІРєРё РїРѕ РІСЂРµРјРµРЅРё РІ РІРµРєС‚РѕСЂРµ СЃРѕР±С‹С‚РёР№ РѕРґРЅРѕРіРѕ РґРЅСЏ
 	static bool IsTime(Event a, Event b)
 	{
 		return a.getBeginHour() * 60 + a.getBeginMinute() < b.getBeginHour() * 60 + b.getBeginMinute();
@@ -288,7 +288,7 @@ public:
 	{
 		sort(day_events.begin(), day_events.end(), IsTime);
 	}
-	void showDay(int X, int Y)//показ всех отсортированных событий дня
+	void showDay(int X, int Y)//РїРѕРєР°Р· РІСЃРµС… РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅРЅС‹С… СЃРѕР±С‹С‚РёР№ РґРЅСЏ
 	{
 		sortEvents();
 		setCursor(X, Y);
@@ -304,7 +304,7 @@ public:
 			}
 		}
 	}
-	void showEvent(int index, int X, int Y)//показать событие из вектора событий по индексу
+	void showEvent(int index, int X, int Y)//РїРѕРєР°Р·Р°С‚СЊ СЃРѕР±С‹С‚РёРµ РёР· РІРµРєС‚РѕСЂР° СЃРѕР±С‹С‚РёР№ РїРѕ РёРЅРґРµРєСЃСѓ
 	{
 		setCursor(X, Y);
 		setColor(Black, White);
@@ -315,8 +315,8 @@ public:
 	}
 };
 int kol_days[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-string week[7] = { "ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС" };//0,1,2,3,4,5,6
-string month_ar[12] = { "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" };
+string week[7] = { "РџРќ", "Р’Рў", "РЎР ", "Р§Рў", "РџРў", "РЎР‘", "Р’РЎ" };//0,1,2,3,4,5,6
+string month_ar[12] = { "РЇРЅРІР°СЂСЊ", "Р¤РµРІСЂР°Р»СЊ", "РњР°СЂС‚", "РђРїСЂРµР»СЊ", "РњР°Р№", "РСЋРЅСЊ", "РСЋР»СЊ", "РђРІРіСѓСЃС‚", "РЎРµРЅС‚СЏР±СЂСЊ", "РћРєС‚СЏР±СЂСЊ", "РќРѕСЏР±СЂСЊ", "Р”РµРєР°Р±СЂСЊ" };
 class Calendar
 {
 	vector <myDay> month_days;
@@ -330,19 +330,19 @@ public:
 	}
 	void clearMonth()
 	{
-		if (month_days.size() > 0)//очищаем предыдущий месяц
+		if (month_days.size() > 0)//РѕС‡РёС‰Р°РµРј РїСЂРµРґС‹РґСѓС‰РёР№ РјРµСЃСЏС†
 		{
 			month_days.clear();
 		}
 	}
-	bool isLeapYear(int year)//проверка на високосный
+	bool isLeapYear(int year)//РїСЂРѕРІРµСЂРєР° РЅР° РІРёСЃРѕРєРѕСЃРЅС‹Р№
 	{
-		return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;//високосный
+		return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;//РІРёСЃРѕРєРѕСЃРЅС‹Р№
 	}
-	void setMonth(int month, int year)//установка вектора дней по дате (пока без событий)
+	void setMonth(int month, int year)//СѓСЃС‚Р°РЅРѕРІРєР° РІРµРєС‚РѕСЂР° РґРЅРµР№ РїРѕ РґР°С‚Рµ (РїРѕРєР° Р±РµР· СЃРѕР±С‹С‚РёР№)
 	{
 		int kol;
-		if (month == 2 && isLeapYear(year))//проверка февраля
+		if (month == 2 && isLeapYear(year))//РїСЂРѕРІРµСЂРєР° С„РµРІСЂР°Р»СЏ
 		{
 			kol = 29;
 		}
@@ -354,7 +354,7 @@ public:
 			month_days.push_back(myDay(i, month, year));
 		}
 	}
-	int getPriorityD(myDay hand_off, myDay obj)//устанавливает и возвращает правильный приоритет по номеру дня в году
+	int getPriorityD(myDay hand_off, myDay obj)//СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Рё РІРѕР·РІСЂР°С‰Р°РµС‚ РїСЂР°РІРёР»СЊРЅС‹Р№ РїСЂРёРѕСЂРёС‚РµС‚ РїРѕ РЅРѕРјРµСЂСѓ РґРЅСЏ РІ РіРѕРґСѓ
 	{
 		int prior = 0;
 		if (obj.getPriority(obj) < hand_off.getPriority(hand_off))
@@ -375,10 +375,10 @@ public:
 		}
 		return prior;
 	}
-	void setEvents(myDay hand_off, vector<myDay>& obj)//приходит вектор который считался из файла и устанавливаются все события на текущий месяц
+	void setEvents(myDay hand_off, vector<myDay>& obj)//РїСЂРёС…РѕРґРёС‚ РІРµРєС‚РѕСЂ РєРѕС‚РѕСЂС‹Р№ СЃС‡РёС‚Р°Р»СЃСЏ РёР· С„Р°Р№Р»Р° Рё СѓСЃС‚Р°РЅР°РІР»РёРІР°СЋС‚СЃСЏ РІСЃРµ СЃРѕР±С‹С‚РёСЏ РЅР° С‚РµРєСѓС‰РёР№ РјРµСЃСЏС†
 	{
 		int prior;
-		for (size_t i = 0; i < month_days.size(); i++)//события в векторе расчлененные на отдельные
+		for (size_t i = 0; i < month_days.size(); i++)//СЃРѕР±С‹С‚РёСЏ РІ РІРµРєС‚РѕСЂРµ СЂР°СЃС‡Р»РµРЅРµРЅРЅС‹Рµ РЅР° РѕС‚РґРµР»СЊРЅС‹Рµ
 		{
 			for (size_t j = 0; j < obj.size(); j++)
 			{
@@ -386,7 +386,7 @@ public:
 				{
 					prior = getPriorityD(hand_off, obj[j]);
 					month_days[i].pushEvent(obj[j].getName(0), obj[j].getBeginHour(0), obj[j].getBeginMinute(0), obj[j].getEndHour(0), obj[j].getEndMinute(0), prior);
-					obj.erase(obj.begin() + j);//при добавлении событие удаляется из общего вектора
+					obj.erase(obj.begin() + j);//РїСЂРё РґРѕР±Р°РІР»РµРЅРёРё СЃРѕР±С‹С‚РёРµ СѓРґР°Р»СЏРµС‚СЃСЏ РёР· РѕР±С‰РµРіРѕ РІРµРєС‚РѕСЂР°
 					j--;
 				}
 			}
@@ -399,10 +399,10 @@ public:
 			var.showDay(X, Y);
 		}
 	}
-	void pushEvent(myDay hand_off, int index, string name, int begin_hour, int begin_minute, int end_hour, int end_minute)//добавляем события в уже сформированнный вектор дней месяца
+	void pushEvent(myDay hand_off, int index, string name, int begin_hour, int begin_minute, int end_hour, int end_minute)//РґРѕР±Р°РІР»СЏРµРј СЃРѕР±С‹С‚РёСЏ РІ СѓР¶Рµ СЃС„РѕСЂРјРёСЂРѕРІР°РЅРЅРЅС‹Р№ РІРµРєС‚РѕСЂ РґРЅРµР№ РјРµСЃСЏС†Р°
 	{
 		int prior = 0;
-		if (month_days[index].getPriority(month_days[index]) < hand_off.getPriority(hand_off))//сравнивает по дню в году
+		if (month_days[index].getPriority(month_days[index]) < hand_off.getPriority(hand_off))//СЃСЂР°РІРЅРёРІР°РµС‚ РїРѕ РґРЅСЋ РІ РіРѕРґСѓ
 		{
 			prior = -1;
 		}
@@ -419,7 +419,7 @@ public:
 		month_days.erase(month_days.begin() + index);
 		month_days.insert(month_days.begin() + index, obj);
 	}
-	void pushEvent(vector<myDay>& obj)//заплюхивает все события из вектора месяца в общий вектор при листании календаря
+	void pushEvent(vector<myDay>& obj)//Р·Р°РїР»СЋС…РёРІР°РµС‚ РІСЃРµ СЃРѕР±С‹С‚РёСЏ РёР· РІРµРєС‚РѕСЂР° РјРµСЃСЏС†Р° РІ РѕР±С‰РёР№ РІРµРєС‚РѕСЂ РїСЂРё Р»РёСЃС‚Р°РЅРёРё РєР°Р»РµРЅРґР°СЂСЏ
 	{
 		int kol = 0;
 		for (size_t i = 0; i < month_days.size(); i++)
@@ -438,19 +438,19 @@ public:
 			}
 		}
 	}
-	//удаление события в векторе дней
-	void dellEvent(int index_day, int index_event)//приходит индекс дня и индекс события удаляем из вектора событий дня
+	//СѓРґР°Р»РµРЅРёРµ СЃРѕР±С‹С‚РёСЏ РІ РІРµРєС‚РѕСЂРµ РґРЅРµР№
+	void dellEvent(int index_day, int index_event)//РїСЂРёС…РѕРґРёС‚ РёРЅРґРµРєСЃ РґРЅСЏ Рё РёРЅРґРµРєСЃ СЃРѕР±С‹С‚РёСЏ СѓРґР°Р»СЏРµРј РёР· РІРµРєС‚РѕСЂР° СЃРѕР±С‹С‚РёР№ РґРЅСЏ
 	{
-		myDay obj(month_days[index_day]);//день из вектора месяца
-		obj.dellEvent(index_event);//удаляем из него событие из вектора событий дня
-		month_days.erase(month_days.begin() + index_day);//удаляем этот день из вектора месяца
-		month_days.insert(month_days.begin() + index_day, obj);//добавляем измененный день
+		myDay obj(month_days[index_day]);//РґРµРЅСЊ РёР· РІРµРєС‚РѕСЂР° РјРµСЃСЏС†Р°
+		obj.dellEvent(index_event);//СѓРґР°Р»СЏРµРј РёР· РЅРµРіРѕ СЃРѕР±С‹С‚РёРµ РёР· РІРµРєС‚РѕСЂР° СЃРѕР±С‹С‚РёР№ РґРЅСЏ
+		month_days.erase(month_days.begin() + index_day);//СѓРґР°Р»СЏРµРј СЌС‚РѕС‚ РґРµРЅСЊ РёР· РІРµРєС‚РѕСЂР° РјРµСЃСЏС†Р°
+		month_days.insert(month_days.begin() + index_day, obj);//РґРѕР±Р°РІР»СЏРµРј РёР·РјРµРЅРµРЅРЅС‹Р№ РґРµРЅСЊ
 	}
-	void showEvent(int index, int X, int Y)//смотрим по выбранному дню из вектора дней месяца
+	void showEvent(int index, int X, int Y)//СЃРјРѕС‚СЂРёРј РїРѕ РІС‹Р±СЂР°РЅРЅРѕРјСѓ РґРЅСЋ РёР· РІРµРєС‚РѕСЂР° РґРЅРµР№ РјРµСЃСЏС†Р°
 	{
 		month_days[index].showDay(X, Y);
 	}
-	void showEvent(int X, int Y)//выводим все дни, где есть какие то события на этот месяц
+	void showEvent(int X, int Y)//РІС‹РІРѕРґРёРј РІСЃРµ РґРЅРё, РіРґРµ РµСЃС‚СЊ РєР°РєРёРµ С‚Рѕ СЃРѕР±С‹С‚РёСЏ РЅР° СЌС‚РѕС‚ РјРµСЃСЏС†
 	{
 		int kol;
 		setCursor(X, Y);
@@ -465,7 +465,7 @@ public:
 			}
 		}
 	}
-	bool isEmptyEvents(int index)//проверка есть ли в этом дне календаря вектор событий
+	bool isEmptyEvents(int index)//РїСЂРѕРІРµСЂРєР° РµСЃС‚СЊ Р»Рё РІ СЌС‚РѕРј РґРЅРµ РєР°Р»РµРЅРґР°СЂСЏ РІРµРєС‚РѕСЂ СЃРѕР±С‹С‚РёР№
 	{
 		return month_days[index].isEmptyEvents();
 	}
@@ -473,12 +473,12 @@ public:
 	{
 		return month_days[index];
 	}
-	void showMonth(int weekday, myDay hand_off)//вывод месяца+раскрашивание дней в которых есть события
+	void showMonth(int weekday, myDay hand_off)//РІС‹РІРѕРґ РјРµСЃСЏС†Р°+СЂР°СЃРєСЂР°С€РёРІР°РЅРёРµ РґРЅРµР№ РІ РєРѕС‚РѕСЂС‹С… РµСЃС‚СЊ СЃРѕР±С‹С‚РёСЏ
 	{
 		int X = 19, Y = 3;
 		setCursor(X, Y);
-		cout << month_ar[month_days[0].getMonth() - 1] << endl << endl;//название месяца
-		if (weekday == 0)//никаких вс 0!
+		cout << month_ar[month_days[0].getMonth() - 1] << endl << endl;//РЅР°Р·РІР°РЅРёРµ РјРµСЃСЏС†Р°
+		if (weekday == 0)//РЅРёРєР°РєРёС… РІСЃ 0!
 		{
 			weekday = 6;
 		}
@@ -491,7 +491,7 @@ public:
 		setCursor(X, Y);
 		for (size_t i = 0; i < 7; i++)
 		{
-			cout << week[i] << "  ";//вывод дней недели
+			cout << week[i] << "  ";//РІС‹РІРѕРґ РґРЅРµР№ РЅРµРґРµР»Рё
 		}
 		setCursor(X - 1, Y + 1);
 		for (size_t i = 0; i < 7; i++)
@@ -503,23 +503,23 @@ public:
 		for (size_t i = 0; i < month_days.size(); i++)
 		{
 			setCursor(X, Y);
-			if (month_days[i].getPriorityD(0) == 1)//текущее
+			if (month_days[i].getPriorityD(0) == 1)//С‚РµРєСѓС‰РµРµ
 			{
 				setColor(White, LightGreen);
 			}
-			else if (month_days[i].getPriorityD(0) == 2)//будущее
+			else if (month_days[i].getPriorityD(0) == 2)//Р±СѓРґСѓС‰РµРµ
 			{
 				setColor(White, Blue);
 			}
-			else if (month_days[i].getPriorityD(0) == 3)//постоянные праздники
+			else if (month_days[i].getPriorityD(0) == 3)//РїРѕСЃС‚РѕСЏРЅРЅС‹Рµ РїСЂР°Р·РґРЅРёРєРё
 			{
 				setColor(White, Red);
 			}
-			else if (month_days[i].getPriorityD(0) == -1)//прошлые
+			else if (month_days[i].getPriorityD(0) == -1)//РїСЂРѕС€Р»С‹Рµ
 			{
 				setColor(White, DarkGray);
 			}
-			else if (month_days[i].getPriority(month_days[i]) == hand_off.getPriority(hand_off))//сегодняшний день окрашивается
+			else if (month_days[i].getPriority(month_days[i]) == hand_off.getPriority(hand_off))//СЃРµРіРѕРґРЅСЏС€РЅРёР№ РґРµРЅСЊ РѕРєСЂР°С€РёРІР°РµС‚СЃСЏ
 			{
 				setColor(Red, LightGray);
 			}
@@ -537,10 +537,10 @@ public:
 		}
 		setColor(Black, Yellow);
 	}
-	//вызов курсора и передвижение по вектору месяцев
+	//РІС‹Р·РѕРІ РєСѓСЂСЃРѕСЂР° Рё РїРµСЂРµРґРІРёР¶РµРЅРёРµ РїРѕ РІРµРєС‚РѕСЂСѓ РјРµСЃСЏС†РµРІ
 	int MoveCursor(int weekday, int weekend, int month, myDay hand_off)
 	{
-		if (weekday == 0)//никаких вс 0!
+		if (weekday == 0)//РЅРёРєР°РєРёС… РІСЃ 0!
 		{
 			weekday = 7;
 		}
@@ -549,7 +549,7 @@ public:
 			weekend = 7;
 		}
 		int X = 6 + (weekday * 4), Y = 8, key, pos_i = 0, Y1, Y2;
-		if ((kol_days[month] == 31 && weekday == 6 || weekday == 7) || (kol_days[month] == 30 && weekday == 7))//сдвиг месяца вверх/низ по Y
+		if ((kol_days[month] == 31 && weekday == 6 || weekday == 7) || (kol_days[month] == 30 && weekday == 7))//СЃРґРІРёРі РјРµСЃСЏС†Р° РІРІРµСЂС…/РЅРёР· РїРѕ Y
 		{
 			Y1 = 20;
 			Y2 = 23;
@@ -605,8 +605,8 @@ public:
 		return -1;
 	}
 };
-//МЕНЮ 
-	//функция для вывода меню на экран на координатах, активный пункт меню выводит другим цветом
+//РњР•РќР® 
+	//С„СѓРЅРєС†РёСЏ РґР»СЏ РІС‹РІРѕРґР° РјРµРЅСЋ РЅР° СЌРєСЂР°РЅ РЅР° РєРѕРѕСЂРґРёРЅР°С‚Р°С…, Р°РєС‚РёРІРЅС‹Р№ РїСѓРЅРєС‚ РјРµРЅСЋ РІС‹РІРѕРґРёС‚ РґСЂСѓРіРёРј С†РІРµС‚РѕРј
 void printMenu(vector<string>masMenu, int punct, int X, int Y)
 {
 	for (size_t i = 0; i < masMenu.size(); i++)
@@ -624,7 +624,7 @@ void printMenu(vector<string>masMenu, int punct, int X, int Y)
 	}
 	setColor(White, Black);
 }
-void printStrelka(vector<string>masMenu, int punct, int X, int Y, int var_strelka)//лево право стрелка отрисовка для месяцев и выбора часов/минут
+void printStrelka(vector<string>masMenu, int punct, int X, int Y, int var_strelka)//Р»РµРІРѕ РїСЂР°РІРѕ СЃС‚СЂРµР»РєР° РѕС‚СЂРёСЃРѕРІРєР° РґР»СЏ РјРµСЃСЏС†РµРІ Рё РІС‹Р±РѕСЂР° С‡Р°СЃРѕРІ/РјРёРЅСѓС‚
 {
 	for (size_t i = 0; i < masMenu.size(); i++)
 	{
@@ -641,7 +641,7 @@ void printStrelka(vector<string>masMenu, int punct, int X, int Y, int var_strelk
 	}
 	setColor(White, Black);
 }
-int choiseDellEvents(myDay obj, int(*ptr)(vector<string>, int, int))//для выбора события для удаления по индексу листает вверх и низ
+int choiseDellEvents(myDay obj, int(*ptr)(vector<string>, int, int))//РґР»СЏ РІС‹Р±РѕСЂР° СЃРѕР±С‹С‚РёСЏ РґР»СЏ СѓРґР°Р»РµРЅРёСЏ РїРѕ РёРЅРґРµРєСЃСѓ Р»РёСЃС‚Р°РµС‚ РІРІРµСЂС… Рё РЅРёР·
 {
 	vector<string>num;
 	int k = 0, index = 0;
@@ -652,16 +652,16 @@ int choiseDellEvents(myDay obj, int(*ptr)(vector<string>, int, int))//для выбора
 		num.push_back(str);
 	}
 	index = ptr(num, 40, 11);
-	return index;//возвращает индекс события
+	return index;//РІРѕР·РІСЂР°С‰Р°РµС‚ РёРЅРґРµРєСЃ СЃРѕР±С‹С‚РёСЏ
 }
-int choiseMenu(vector<string>masMenu, int X, int Y)//выбор пунктов верх низ
+int choiseMenu(vector<string>masMenu, int X, int Y)//РІС‹Р±РѕСЂ РїСѓРЅРєС‚РѕРІ РІРµСЂС… РЅРёР·
 {
 	int key;
 	int punctNumber = 0;
 	do
 	{
 		printMenu(masMenu, punctNumber, X, Y);
-		key = _getch();//возвращает код нажатой клавиши
+		key = _getch();//РІРѕР·РІСЂР°С‰Р°РµС‚ РєРѕРґ РЅР°Р¶Р°С‚РѕР№ РєР»Р°РІРёС€Рё
 		switch (key)
 		{
 		case Up:
@@ -688,7 +688,7 @@ int choiseMenu(vector<string>masMenu, int X, int Y)//выбор пунктов верх низ
 	} while (key != esc);
 	return -1;
 }
-//предикат который определяет, записан ли пользователь в файл
+//РїСЂРµРґРёРєР°С‚ РєРѕС‚РѕСЂС‹Р№ РѕРїСЂРµРґРµР»СЏРµС‚, Р·Р°РїРёСЃР°РЅ Р»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РІ С„Р°Р№Р»
 bool isUser(ifstream& FILE, User user, User& temp)
 {
 	if (FILE.is_open())
@@ -706,14 +706,14 @@ bool isUser(ifstream& FILE, User user, User& temp)
 		return false;
 	}
 }
-bool isEmpty(ifstream& FILE)//проверка пуст ли файл
+bool isEmpty(ifstream& FILE)//РїСЂРѕРІРµСЂРєР° РїСѓСЃС‚ Р»Рё С„Р°Р№Р»
 {
 	int size;
-	FILE.seekg(0, ios::end);//смещаемся от начала файла до конца
-	size = FILE.tellg();//узнаём на какое количество байт произошло смещение
+	FILE.seekg(0, ios::end);//СЃРјРµС‰Р°РµРјСЃСЏ РѕС‚ РЅР°С‡Р°Р»Р° С„Р°Р№Р»Р° РґРѕ РєРѕРЅС†Р°
+	size = FILE.tellg();//СѓР·РЅР°С‘Рј РЅР° РєР°РєРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ Р±Р°Р№С‚ РїСЂРѕРёР·РѕС€Р»Рѕ СЃРјРµС‰РµРЅРёРµ
 	return size == 0;
 }
-void Painting(Color color, int h, int w, int X, int Y)//затиралочка и отрисовка любых прямоугольников
+void Painting(Color color, int h, int w, int X, int Y)//Р·Р°С‚РёСЂР°Р»РѕС‡РєР° Рё РѕС‚СЂРёСЃРѕРІРєР° Р»СЋР±С‹С… РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРєРѕРІ
 {
 	setColor(Color(color), Color(color));
 	for (size_t i = 0; i < h; i++)
@@ -726,8 +726,8 @@ void Painting(Color color, int h, int w, int X, int Y)//затиралочка и отрисовка 
 	}
 	setColor(White, Yellow);
 }
-//лево право для выбора часов и минут
-int getVar(int size_var, vector <string> menu_strelka, int X, int Y, int var_strelka)//принимает РАЗМЕР ВЕКТОРА и перебирает его индекс(у меня индексы совпадают с значением)
+//Р»РµРІРѕ РїСЂР°РІРѕ РґР»СЏ РІС‹Р±РѕСЂР° С‡Р°СЃРѕРІ Рё РјРёРЅСѓС‚
+int getVar(int size_var, vector <string> menu_strelka, int X, int Y, int var_strelka)//РїСЂРёРЅРёРјР°РµС‚ Р РђР—РњР•Р  Р’Р•РљРўРћР Рђ Рё РїРµСЂРµР±РёСЂР°РµС‚ РµРіРѕ РёРЅРґРµРєСЃ(Сѓ РјРµРЅСЏ РёРЅРґРµРєСЃС‹ СЃРѕРІРїР°РґР°СЋС‚ СЃ Р·РЅР°С‡РµРЅРёРµРј)
 {
 	int key, index = 0, i_vector = 5;
 	do
@@ -760,7 +760,7 @@ int getVar(int size_var, vector <string> menu_strelka, int X, int Y, int var_str
 	} while (key != esc);
 	return -1;
 }
-//функция проверяет название, которое вводит пользователь на запрещенные символы
+//С„СѓРЅРєС†РёСЏ РїСЂРѕРІРµСЂСЏРµС‚ РЅР°Р·РІР°РЅРёРµ, РєРѕС‚РѕСЂРѕРµ РІРІРѕРґРёС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РЅР° Р·Р°РїСЂРµС‰РµРЅРЅС‹Рµ СЃРёРјРІРѕР»С‹
 bool isNameEvent(string name)
 {
 	int poz;
@@ -770,7 +770,7 @@ bool isNameEvent(string name)
 		return false;
 	}
 }
-void setNameEvent(string& name)//если пользователь вводит пробел, нельзя чтобы так записалось в файл
+void setNameEvent(string& name)//РµСЃР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РІРІРѕРґРёС‚ РїСЂРѕР±РµР», РЅРµР»СЊР·СЏ С‡С‚РѕР±С‹ С‚Р°Рє Р·Р°РїРёСЃР°Р»РѕСЃСЊ РІ С„Р°Р№Р»
 {
 	int poz;
 	do
@@ -784,7 +784,7 @@ void setNameEvent(string& name)//если пользователь вводит пробел, нельзя чтобы т
 	} while (poz != name.npos);
 }
 template<typename myType>
-void copyVector(vector<myType>obj, vector<myType>& temp)//копирование всяких векторов
+void copyVector(vector<myType>obj, vector<myType>& temp)//РєРѕРїРёСЂРѕРІР°РЅРёРµ РІСЃСЏРєРёС… РІРµРєС‚РѕСЂРѕРІ
 {
 	temp.clear();
 	for (size_t i = 0; i < obj.size(); i++)
@@ -792,7 +792,7 @@ void copyVector(vector<myType>obj, vector<myType>& temp)//копирование всяких век
 		temp.push_back(obj[i]);
 	}
 }
-//установка времени повторяется 2 раза
+//СѓСЃС‚Р°РЅРѕРІРєР° РІСЂРµРјРµРЅРё РїРѕРІС‚РѕСЂСЏРµС‚СЃСЏ 2 СЂР°Р·Р°
 void setTimeEvent(vector<int>myHour, vector<int>myMinute, vector<string>menu_strelka, int& beg_h, int& beg_m, int& end_h, int& end_m, int (*ptr2)(int, vector<string>, int, int, int))
 {
 	bool endTime = false;
@@ -800,20 +800,20 @@ void setTimeEvent(vector<int>myHour, vector<int>myMinute, vector<string>menu_str
 	{
 		setCursor(42, 15);
 		setColor(Black, Yellow);
-		cout << "Начало (часы):";
+		cout << "РќР°С‡Р°Р»Рѕ (С‡Р°СЃС‹):";
 		beg_h = getVar(myHour.size(), menu_strelka, 42, 17, 9);
 		setCursor(58, 15);
 		setColor(Black, Yellow);
-		cout << "Начало (минуты):";
+		cout << "РќР°С‡Р°Р»Рѕ (РјРёРЅСѓС‚С‹):";
 		beg_m = getVar(myMinute.size(), menu_strelka, 58, 17, 9);
 		Painting(Color(Yellow), 5, 40, 42, 15);
 		setCursor(42, 15);
 		setColor(Black, Yellow);
-		cout << "Окончание (часы):";//проверка если время окончания меньше времени начала не дает установить
+		cout << "РћРєРѕРЅС‡Р°РЅРёРµ (С‡Р°СЃС‹):";//РїСЂРѕРІРµСЂРєР° РµСЃР»Рё РІСЂРµРјСЏ РѕРєРѕРЅС‡Р°РЅРёСЏ РјРµРЅСЊС€Рµ РІСЂРµРјРµРЅРё РЅР°С‡Р°Р»Р° РЅРµ РґР°РµС‚ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ
 		end_h = getVar(myHour.size(), menu_strelka, 42, 17, 9);
 		setCursor(62, 15);
 		setColor(Black, Yellow);
-		cout << "Окончание (минуты):";
+		cout << "РћРєРѕРЅС‡Р°РЅРёРµ (РјРёРЅСѓС‚С‹):";
 		end_m = getVar(myMinute.size(), menu_strelka, 62, 17, 9);
 		if (beg_h * 60 + beg_m < end_h * 60 + end_m)
 		{
@@ -824,16 +824,16 @@ void setTimeEvent(vector<int>myHour, vector<int>myMinute, vector<string>menu_str
 			Painting(Color(Yellow), 5, 40, 42, 15);
 			setCursor(42, 15);
 			setColor(Black, Yellow);
-			cout << "Время окончания события ";
+			cout << "Р’СЂРµРјСЏ РѕРєРѕРЅС‡Р°РЅРёСЏ СЃРѕР±С‹С‚РёСЏ ";
 			setCursor(42, 16);
-			cout << "не может быть меньше времени начала!";
+			cout << "РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РјРµРЅСЊС€Рµ РІСЂРµРјРµРЅРё РЅР°С‡Р°Р»Р°!";
 			Sleep(1500);
 			Painting(Color(Yellow), 5, 40, 42, 15);
 			endTime = false;
 		}
 	} while (endTime == false);
 }
-static bool IsData(myDay a, myDay b)//сравниваем именно по секундам это для сортировке в общем векторе событий
+static bool IsData(myDay a, myDay b)//СЃСЂР°РІРЅРёРІР°РµРј РёРјРµРЅРЅРѕ РїРѕ СЃРµРєСѓРЅРґР°Рј СЌС‚Рѕ РґР»СЏ СЃРѕСЂС‚РёСЂРѕРІРєРµ РІ РѕР±С‰РµРј РІРµРєС‚РѕСЂРµ СЃРѕР±С‹С‚РёР№
 {
 	int secA, secB;
 	tm setA, setB;
@@ -849,12 +849,12 @@ static bool IsData(myDay a, myDay b)//сравниваем именно по секундам это для сорт
 	setB.tm_min = b.getBeginMinute(0);
 	return mktime(&setA) < mktime(&setB);
 }
-//сортировка по дате и времени вектора дней с событиями
+//СЃРѕСЂС‚РёСЂРѕРІРєР° РїРѕ РґР°С‚Рµ Рё РІСЂРµРјРµРЅРё РІРµРєС‚РѕСЂР° РґРЅРµР№ СЃ СЃРѕР±С‹С‚РёСЏРјРё
 void sortEvents(vector<myDay>& events)
 {
 	sort(events.begin(), events.end(), IsData);
 }
-//сортировка 2 векторов будущих и пропущенных событий не выводится если нет событий в векторах или пользователь отключил сообщение
+//СЃРѕСЂС‚РёСЂРѕРІРєР° 2 РІРµРєС‚РѕСЂРѕРІ Р±СѓРґСѓС‰РёС… Рё РїСЂРѕРїСѓС‰РµРЅРЅС‹С… СЃРѕР±С‹С‚РёР№ РЅРµ РІС‹РІРѕРґРёС‚СЃСЏ РµСЃР»Рё РЅРµС‚ СЃРѕР±С‹С‚РёР№ РІ РІРµРєС‚РѕСЂР°С… РёР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РѕС‚РєР»СЋС‡РёР» СЃРѕРѕР±С‰РµРЅРёРµ
 void sortVectorData(vector<myDay>& all_holidays, myDay hand_off, myTime hand_off_time, int& var, vector<string>yes_no, int size_holidays)
 {
 	vector<myDay>past, future;
@@ -881,7 +881,7 @@ void sortVectorData(vector<myDay>& all_holidays, myDay hand_off, myTime hand_off
 			{
 				setCursor(45, 3);
 				setColor(Red, Yellow);
-				cout << "Запланированы события:";
+				cout << "Р—Р°РїР»Р°РЅРёСЂРѕРІР°РЅС‹ СЃРѕР±С‹С‚РёСЏ:";
 				sortEvents(future);
 				int i = 0;
 				for (auto var : future)
@@ -891,7 +891,7 @@ void sortVectorData(vector<myDay>& all_holidays, myDay hand_off, myTime hand_off
 				}
 				setCursor(45, 10);
 				setColor(Red, Yellow);
-				cout << "Пропущены события:";
+				cout << "РџСЂРѕРїСѓС‰РµРЅС‹ СЃРѕР±С‹С‚РёСЏ:";
 				sortEvents(past);
 				i = 0;
 				for (auto var : past)
@@ -903,7 +903,7 @@ void sortVectorData(vector<myDay>& all_holidays, myDay hand_off, myTime hand_off
 				future.clear();
 				setCursor(45, 21);
 				setColor(Red, White);
-				cout << " Отключить оповещение? ";
+				cout << " РћС‚РєР»СЋС‡РёС‚СЊ РѕРїРѕРІРµС‰РµРЅРёРµ? ";
 				index = choiseMenu(yes_no, 70, 21);
 				if (index == 0)
 				{
@@ -914,92 +914,92 @@ void sortVectorData(vector<myDay>& all_holidays, myDay hand_off, myTime hand_off
 		}
 	}
 }
-void changeTime(tm& mytime, myDay& hand_off, myTime& hand_off_time, vector<myDay>& all_holidays, int& var, vector<string>yes_no, int size_holidays)//через определенное время переустанавливает переменные для сравнения текущей даты и времени со датой и временем событий
+void changeTime(tm& mytime, myDay& hand_off, myTime& hand_off_time, vector<myDay>& all_holidays, int& var, vector<string>yes_no, int size_holidays)//С‡РµСЂРµР· РѕРїСЂРµРґРµР»РµРЅРЅРѕРµ РІСЂРµРјСЏ РїРµСЂРµСѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ РїРµСЂРµРјРµРЅРЅС‹Рµ РґР»СЏ СЃСЂР°РІРЅРµРЅРёСЏ С‚РµРєСѓС‰РµР№ РґР°С‚С‹ Рё РІСЂРµРјРµРЅРё СЃРѕ РґР°С‚РѕР№ Рё РІСЂРµРјРµРЅРµРј СЃРѕР±С‹С‚РёР№
 {
-	time_t current_time;//милисекунды
+	time_t current_time;//РјРёР»РёСЃРµРєСѓРЅРґС‹
 	time(&current_time);
-	tm mytime_proverka;//структура для хранения текущей даты
-	localtime_s(&mytime_proverka, &current_time);//расчленяем на поля
+	tm mytime_proverka;//СЃС‚СЂСѓРєС‚СѓСЂР° РґР»СЏ С…СЂР°РЅРµРЅРёСЏ С‚РµРєСѓС‰РµР№ РґР°С‚С‹
+	localtime_s(&mytime_proverka, &current_time);//СЂР°СЃС‡Р»РµРЅСЏРµРј РЅР° РїРѕР»СЏ
 	/*cout << "hand off hour:" << hand_off_time.hour << "\thand off minute:" << hand_off_time.minute << endl;*/
 	/*cout << "mytime2.hour:" << mytime_proverka.tm_hour << "\tmytime2.minute:" << mytime_proverka.tm_min << endl;*/
 	if ((mytime_proverka.tm_hour * 60 + mytime_proverka.tm_min) - (mytime.tm_hour * 60 + mytime.tm_min) > 0)
 	{
 		hand_off.setAllDay(mytime_proverka.tm_mday, mytime_proverka.tm_mon + 1, mytime_proverka.tm_year + 1900);
-		hand_off_time.setTime(mytime_proverka.tm_hour, mytime_proverka.tm_min);//сохраняем текущее врем
+		hand_off_time.setTime(mytime_proverka.tm_hour, mytime_proverka.tm_min);//СЃРѕС…СЂР°РЅСЏРµРј С‚РµРєСѓС‰РµРµ РІСЂРµРј
 		setCursor(44, 13);
 		/*cout << "hand_of hour:" << hand_off_time.hour << "\thand_of minute: " << hand_off_time.minute << endl;*/
 		mytime.tm_hour = mytime_proverka.tm_hour;
 		mytime.tm_min = mytime_proverka.tm_min;
-		if ((mytime_proverka.tm_hour * 60 + mytime_proverka.tm_min) == 0)//если начинаются следующие сутки переустанавливам полностью 
+		if ((mytime_proverka.tm_hour * 60 + mytime_proverka.tm_min) == 0)//РµСЃР»Рё РЅР°С‡РёРЅР°СЋС‚СЃСЏ СЃР»РµРґСѓСЋС‰РёРµ СЃСѓС‚РєРё РїРµСЂРµСѓСЃС‚Р°РЅР°РІР»РёРІР°Рј РїРѕР»РЅРѕСЃС‚СЊСЋ 
 		{
 			localtime_s(&mytime, &current_time);
 			mktime(&mytime);
 			myDay obj(mytime.tm_mday, mytime.tm_mon + 1, mytime.tm_year + 1900);
-			cout << "СЕГОДНЯ:  ";
+			cout << "РЎР•Р“РћР”РќРЇ:  ";
 			obj.showDay(24, 1);
 		}
 		sortVectorData(all_holidays, hand_off, hand_off_time, var, yes_no, size_holidays);
 	}
 }
 int main() {
-	SetConsoleCP(1251);//ввод кириллицы
-	SetConsoleOutputCP(1251);//вывод кириллицы
+	SetConsoleCP(1251);//РІРІРѕРґ РєРёСЂРёР»Р»РёС†С‹
+	SetConsoleOutputCP(1251);//РІС‹РІРѕРґ РєРёСЂРёР»Р»РёС†С‹
 	srand(time(NULL));
 	system("Color E3");
 	system("mode con cols=100 lines=50");
-	//регистрация и авторизация
+	//СЂРµРіРёСЃС‚СЂР°С†РёСЏ Рё Р°РІС‚РѕСЂРёР·Р°С†РёСЏ
 	User account;
 	User temp;
 	myDay temp_day;
 	Event temp_event;
 	myDay holiday1, holiday2, holiday3, holiday4;
 	string fileName;
-	vector<myDay>all_holidays, temp_vector;//сюда считываются и записываются все праздники
+	vector<myDay>all_holidays, temp_vector;//СЃСЋРґР° СЃС‡РёС‚С‹РІР°СЋС‚СЃСЏ Рё Р·Р°РїРёСЃС‹РІР°СЋС‚СЃСЏ РІСЃРµ РїСЂР°Р·РґРЅРёРєРё
 	holiday1.setAllDay(8, 3, 2023);
-	holiday1.pushEvent("8_марта", 0, 0, 23, 59, 3);
+	holiday1.pushEvent("8_РјР°СЂС‚Р°", 0, 0, 23, 59, 3);
 	all_holidays.push_back(holiday1);
 	holiday2.setAllDay(5, 10, 2023);
-	holiday2.pushEvent("День_учителя", 0, 0, 23, 59, 3);
+	holiday2.pushEvent("Р”РµРЅСЊ_СѓС‡РёС‚РµР»СЏ", 0, 0, 23, 59, 3);
 	all_holidays.push_back(holiday2);
 	holiday3.setAllDay(9, 5, 2023);
-	holiday3.pushEvent("9_мая", 0, 0, 23, 59, 3);
+	holiday3.pushEvent("9_РјР°СЏ", 0, 0, 23, 59, 3);
 	all_holidays.push_back(holiday3);
 	holiday4.setAllDay(31, 12, 2023);
-	holiday4.pushEvent("Новый_год", 0, 0, 23, 59, 3);
+	holiday4.pushEvent("РќРѕРІС‹Р№_РіРѕРґ", 0, 0, 23, 59, 3);
 	all_holidays.push_back(holiday4);
 	int index, index_yes_no;
-	vector<string>menu{ "   Регистрация   ", "   Авторизация   ", "      Выход      " };
+	vector<string>menu{ "   Р РµРіРёСЃС‚СЂР°С†РёСЏ   ", "   РђРІС‚РѕСЂРёР·Р°С†РёСЏ   ", "      Р’С‹С…РѕРґ      " };
 	vector<string>menu_strelka{ " < ", " > " };
-	vector<string> yes_no{ " ДА  ", " НЕТ " };
-	vector<string>add_dell{ " Добавить событие      ", " Удалить событие       ", " Редактировать событие " };
-	vector<string>redaktor{ " Время события     ", " Название события  " };
-	vector<string>choiceEvents{ "  Напоминание  ", "  Встреча      ", "  Событие      ", "  Свое событие " };//свое событие вызвать гетлайн
+	vector<string> yes_no{ " Р”Рђ  ", " РќР•Рў " };
+	vector<string>add_dell{ " Р”РѕР±Р°РІРёС‚СЊ СЃРѕР±С‹С‚РёРµ      ", " РЈРґР°Р»РёС‚СЊ СЃРѕР±С‹С‚РёРµ       ", " Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ СЃРѕР±С‹С‚РёРµ " };
+	vector<string>redaktor{ " Р’СЂРµРјСЏ СЃРѕР±С‹С‚РёСЏ     ", " РќР°Р·РІР°РЅРёРµ СЃРѕР±С‹С‚РёСЏ  " };
+	vector<string>choiceEvents{ "  РќР°РїРѕРјРёРЅР°РЅРёРµ  ", "  Р’СЃС‚СЂРµС‡Р°      ", "  РЎРѕР±С‹С‚РёРµ      ", "  РЎРІРѕРµ СЃРѕР±С‹С‚РёРµ " };//СЃРІРѕРµ СЃРѕР±С‹С‚РёРµ РІС‹Р·РІР°С‚СЊ РіРµС‚Р»Р°Р№РЅ
 	vector<int>myHour{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
 	vector<int>myMinute{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59 };
 	bool isCorrect = true;
 	int count_autoriz = 0;
 	int poz;
-	//РЕГИСТРАЦИЯ И АВТОРИЗАЦИЯ
+	//Р Р•Р“РРЎРўР РђР¦РРЇ Р РђР’РўРћР РР—РђР¦РРЇ
 	do
 	{
 		isCorrect = true;
 		index = choiseMenu(menu, 35, 15);
-		if (index == 0)//регистрация нельзя вводить символы /*-+_?& и пробелы
+		if (index == 0)//СЂРµРіРёСЃС‚СЂР°С†РёСЏ РЅРµР»СЊР·СЏ РІРІРѕРґРёС‚СЊ СЃРёРјРІРѕР»С‹ /*-+_?& Рё РїСЂРѕР±РµР»С‹
 		{
 			poz = -1;
 			Painting(Color(Yellow), 10, 60, 20, 15);
 			setCursor(30, 15);
 			setColor(White, Green);
-			cout << " Введите логин: ";
+			cout << " Р’РІРµРґРёС‚Рµ Р»РѕРіРёРЅ: ";
 			Painting(Color(White), 1, 25, 46, 15);
 			setCursor(47, 15);
 			setColor(Green, White);
 			getline(cin, account.login);
-			poz = account.login.find_first_of("/*+-&?., _!#$%^()=<>абвгдеёжзийклмнопрстуфцщшыюяьъхэ");
+			poz = account.login.find_first_of("/*+-&?., _!#$%^()=<>Р°Р±РІРіРґРµС‘Р¶Р·РёР№РєР»РјРЅРѕРїСЂСЃС‚СѓС„С†С‰С€С‹СЋСЏСЊСЉС…СЌ");
 			if (poz != account.login.npos)
 			{
 				setCursor(10, 18);
-				cout << "Запрещенный символ! Логин должен состоять из латинских букв и цифр без пробелов!" << endl;
+				cout << "Р—Р°РїСЂРµС‰РµРЅРЅС‹Р№ СЃРёРјРІРѕР»! Р›РѕРіРёРЅ РґРѕР»Р¶РµРЅ СЃРѕСЃС‚РѕСЏС‚СЊ РёР· Р»Р°С‚РёРЅСЃРєРёС… Р±СѓРєРІ Рё С†РёС„СЂ Р±РµР· РїСЂРѕР±РµР»РѕРІ!" << endl;
 				Sleep(2000);
 				Painting(Color(Yellow), 20, 80, 10, 15);
 				isCorrect = false;
@@ -1014,7 +1014,7 @@ int main() {
 						Painting(Color(Yellow), 10, 60, 20, 15);
 						setCursor(28, 18);
 						setColor(White, Green);
-						cout << "Логин занят!" << endl;
+						cout << "Р›РѕРіРёРЅ Р·Р°РЅСЏС‚!" << endl;
 						Sleep(2000);
 						Painting(Color(Yellow), 10, 60, 20, 15);
 						isCorrect = false;
@@ -1027,21 +1027,21 @@ int main() {
 					ofstream writeF("superuser.txt", ios::app);
 					setCursor(30, 17);
 					setColor(White, Green);
-					cout << " Введите пароль: ";
+					cout << " Р’РІРµРґРёС‚Рµ РїР°СЂРѕР»СЊ: ";
 					Painting(Color(White), 1, 25, 46, 17);
 					setCursor(47, 17);
 					setColor(Green, White);
 					getline(cin, account.pass);
-					poz = account.pass.find_first_of("/*+-&?., _!#$%^()=<>абвгдеёжзийклмнопрстуфцщшыюяьъхэ");
+					poz = account.pass.find_first_of("/*+-&?., _!#$%^()=<>Р°Р±РІРіРґРµС‘Р¶Р·РёР№РєР»РјРЅРѕРїСЂСЃС‚СѓС„С†С‰С€С‹СЋСЏСЊСЉС…СЌ");
 					if (poz != account.pass.npos)
 					{
 						setCursor(10, 18);
-						cout << "Запрещенный символ! пароль должен состоять из латинских букв и цифр без пробелов!" << endl;
+						cout << "Р—Р°РїСЂРµС‰РµРЅРЅС‹Р№ СЃРёРјРІРѕР»! РїР°СЂРѕР»СЊ РґРѕР»Р¶РµРЅ СЃРѕСЃС‚РѕСЏС‚СЊ РёР· Р»Р°С‚РёРЅСЃРєРёС… Р±СѓРєРІ Рё С†РёС„СЂ Р±РµР· РїСЂРѕР±РµР»РѕРІ!" << endl;
 						Sleep(2000);
 						Painting(Color(Yellow), 20, 80, 10, 15);
 						isCorrect = false;
 					}
-					//если файл не пуст - записывать перед новым юзером \n
+					//РµСЃР»Рё С„Р°Р№Р» РЅРµ РїСѓСЃС‚ - Р·Р°РїРёСЃС‹РІР°С‚СЊ РїРµСЂРµРґ РЅРѕРІС‹Рј СЋР·РµСЂРѕРј \n
 					else
 					{
 						if (!isEmpty(readF))
@@ -1056,16 +1056,16 @@ int main() {
 						Painting(Color(Yellow), 10, 60, 20, 15);
 						setCursor(30, 15);
 						setColor(White, Green);
-						cout << "Регистрация успешна!" << endl;
+						cout << "Р РµРіРёСЃС‚СЂР°С†РёСЏ СѓСЃРїРµС€РЅР°!" << endl;
 						Sleep(1000);
 						Painting(Color(Yellow), 10, 60, 20, 15);
-						fileName = account.login;//запись 8 марта
+						fileName = account.login;//Р·Р°РїРёСЃСЊ 8 РјР°СЂС‚Р°
 						fileName += ".txt";
-						ofstream writeEvents(fileName);//запись постоянных праздников только после успешной регистрации
+						ofstream writeEvents(fileName);//Р·Р°РїРёСЃСЊ РїРѕСЃС‚РѕСЏРЅРЅС‹С… РїСЂР°Р·РґРЅРёРєРѕРІ С‚РѕР»СЊРєРѕ РїРѕСЃР»Рµ СѓСЃРїРµС€РЅРѕР№ СЂРµРіРёСЃС‚СЂР°С†РёРё
 						for (size_t i = 0; i < all_holidays.size(); i++)
 						{
 							writeEvents << all_holidays[i].getDay() << " " << all_holidays[i].getMonth() << " " << all_holidays[i].getYear() << " " << all_holidays[i].getBeginHour(0) << " " << all_holidays[i].getBeginMinute(0) << " " << all_holidays[i].getEndHour(0) << " " << all_holidays[i].getEndMinute(0) << " " << all_holidays[i].getName(0) << " " << all_holidays[i].getPriorityD(0);
-							if (i < all_holidays.size() - 1)//долепливаем перевод на новую строку везде кроме последнего
+							if (i < all_holidays.size() - 1)//РґРѕР»РµРїР»РёРІР°РµРј РїРµСЂРµРІРѕРґ РЅР° РЅРѕРІСѓСЋ СЃС‚СЂРѕРєСѓ РІРµР·РґРµ РєСЂРѕРјРµ РїРѕСЃР»РµРґРЅРµРіРѕ
 							{
 								writeEvents << "\n";
 							}
@@ -1076,13 +1076,13 @@ int main() {
 				}
 			}
 		}
-		if (index == 1)//авторизация
+		if (index == 1)//Р°РІС‚РѕСЂРёР·Р°С†РёСЏ
 		{
 			isCorrect = false;
 			Painting(Color(Yellow), 10, 60, 20, 15);
 			setCursor(30, 15);
 			setColor(White, Green);
-			cout << " Введите логин: ";
+			cout << " Р’РІРµРґРёС‚Рµ Р»РѕРіРёРЅ: ";
 			Painting(Color(White), 1, 25, 46, 15);
 			setCursor(47, 15);
 			setColor(Green, White);
@@ -1094,14 +1094,14 @@ int main() {
 				{
 					setCursor(70, 15);
 					setColor(Green, Yellow);
-					cout << "Логин принят!" << endl;
+					cout << "Р›РѕРіРёРЅ РїСЂРёРЅСЏС‚!" << endl;
 					isCorrect = true;
 				}
 				else
 				{
 					setCursor(70, 15);
 					setColor(Green, Yellow);
-					cout << "Логин не найден!" << endl;
+					cout << "Р›РѕРіРёРЅ РЅРµ РЅР°Р№РґРµРЅ!" << endl;
 					Sleep(1000);
 					Painting(Color(Yellow), 10, 80, 20, 15);
 					isCorrect = false;
@@ -1113,7 +1113,7 @@ int main() {
 					{
 						setCursor(30, 17);
 						setColor(White, Green);
-						cout << " Введите пароль: ";
+						cout << " Р’РІРµРґРёС‚Рµ РїР°СЂРѕР»СЊ: ";
 						Painting(Color(White), 1, 25, 46, 17);
 						setCursor(47, 17);
 						setColor(Green, White);
@@ -1122,7 +1122,7 @@ int main() {
 						{
 							setCursor(72, 17);
 							setColor(Green, Yellow);
-							cout << "Пароль принят" << endl;
+							cout << "РџР°СЂРѕР»СЊ РїСЂРёРЅСЏС‚" << endl;
 							Sleep(1000);
 							count_autoriz = 3;
 							isCorrect = true;
@@ -1131,7 +1131,7 @@ int main() {
 						{
 							setCursor(72, 17);
 							setColor(Green, Yellow);
-							cout << "Ошибка пароля" << endl;
+							cout << "РћС€РёР±РєР° РїР°СЂРѕР»СЏ" << endl;
 							Sleep(1000);
 							Painting(Color(Yellow), 10, 80, 20, 15);
 							count_autoriz++;
@@ -1144,7 +1144,7 @@ int main() {
 			{
 				setCursor(70, 15);
 				setColor(Green, Yellow);
-				cout << "Логин не найден!" << endl;
+				cout << "Р›РѕРіРёРЅ РЅРµ РЅР°Р№РґРµРЅ!" << endl;
 				Sleep(1000);
 				Painting(Color(Yellow), 10, 80, 20, 15);
 				isCorrect = false;
@@ -1152,17 +1152,17 @@ int main() {
 		}
 	} while (!isCorrect);
 	system("cls");
-	time_t current_time;//милисекунды
+	time_t current_time;//РјРёР»РёСЃРµРєСѓРЅРґС‹
 	time(&current_time);
-	tm mytime;//структура для хранения текущей даты
-	localtime_s(&mytime, &current_time);//расчленяем на поля
+	tm mytime;//СЃС‚СЂСѓРєС‚СѓСЂР° РґР»СЏ С…СЂР°РЅРµРЅРёСЏ С‚РµРєСѓС‰РµР№ РґР°С‚С‹
+	localtime_s(&mytime, &current_time);//СЂР°СЃС‡Р»РµРЅСЏРµРј РЅР° РїРѕР»СЏ
 	myDay obj(mytime.tm_mday, mytime.tm_mon + 1, mytime.tm_year + 1900);
-	myDay hand_off(obj);//руки проч это дата сегодняшнего дня для сравнений всяких
-	myTime hand_off_time;//текущее время
-	hand_off_time.setTime(mytime.tm_hour, mytime.tm_min);//сохраняем текущее время
+	myDay hand_off(obj);//СЂСѓРєРё РїСЂРѕС‡ СЌС‚Рѕ РґР°С‚Р° СЃРµРіРѕРґРЅСЏС€РЅРµРіРѕ РґРЅСЏ РґР»СЏ СЃСЂР°РІРЅРµРЅРёР№ РІСЃСЏРєРёС…
+	myTime hand_off_time;//С‚РµРєСѓС‰РµРµ РІСЂРµРјСЏ
+	hand_off_time.setTime(mytime.tm_hour, mytime.tm_min);//СЃРѕС…СЂР°РЅСЏРµРј С‚РµРєСѓС‰РµРµ РІСЂРµРјСЏ
 	setCursor(14, 1);
 	setColor(Black, White);
-	cout << "СЕГОДНЯ:  ";
+	cout << "РЎР•Р“РћР”РќРЇ:  ";
 	obj.showDay(24, 1);
 	Calendar cal;
 	index = 0;
@@ -1170,7 +1170,7 @@ int main() {
 	int day_t, month_t, year_t, beg_h, beg_m, end_h, end_m, prior_t;
 	string name_t;
 	all_holidays.clear();
-	//считываем в вектор дней все из файла юзера
+	//СЃС‡РёС‚С‹РІР°РµРј РІ РІРµРєС‚РѕСЂ РґРЅРµР№ РІСЃРµ РёР· С„Р°Р№Р»Р° СЋР·РµСЂР°
 	fileName = account.login;
 	fileName += ".txt";
 	ifstream readEvents(fileName);
@@ -1189,7 +1189,7 @@ int main() {
 	readEvents.close();
 	int weekend, index_strelka = 0, key, var = 0;
 	bool endTime = false;
-	int (*ptr)(vector<string>, int, int);//передаем функцию в качестве аргумента
+	int (*ptr)(vector<string>, int, int);//РїРµСЂРµРґР°РµРј С„СѓРЅРєС†РёСЋ РІ РєР°С‡РµСЃС‚РІРµ Р°СЂРіСѓРјРµРЅС‚Р°
 	int (*ptr2)(int, vector<string>, int, int, int);
 	ptr2 = getVar;
 	ptr = choiseMenu;
@@ -1197,29 +1197,29 @@ int main() {
 	do
 	{
 		copyVector(all_holidays, temp_vector);
-		cal.setMonth(mytime.tm_mon + 1, mytime.tm_year + 1900);//заполнился вектор дней текущая дата
-		cal.setEvents(hand_off, all_holidays);//заполнились события именно на выбранный месяц и удалились из общего вектора
-		mytime.tm_mday = kol_days[mytime.tm_mon];//узнаем день недели последнего дня
-		if (mytime.tm_mon == 1 && cal.isLeapYear(mytime.tm_year))//проверка для февраля
+		cal.setMonth(mytime.tm_mon + 1, mytime.tm_year + 1900);//Р·Р°РїРѕР»РЅРёР»СЃСЏ РІРµРєС‚РѕСЂ РґРЅРµР№ С‚РµРєСѓС‰Р°СЏ РґР°С‚Р°
+		cal.setEvents(hand_off, all_holidays);//Р·Р°РїРѕР»РЅРёР»РёСЃСЊ СЃРѕР±С‹С‚РёСЏ РёРјРµРЅРЅРѕ РЅР° РІС‹Р±СЂР°РЅРЅС‹Р№ РјРµСЃСЏС† Рё СѓРґР°Р»РёР»РёСЃСЊ РёР· РѕР±С‰РµРіРѕ РІРµРєС‚РѕСЂР°
+		mytime.tm_mday = kol_days[mytime.tm_mon];//СѓР·РЅР°РµРј РґРµРЅСЊ РЅРµРґРµР»Рё РїРѕСЃР»РµРґРЅРµРіРѕ РґРЅСЏ
+		if (mytime.tm_mon == 1 && cal.isLeapYear(mytime.tm_year))//РїСЂРѕРІРµСЂРєР° РґР»СЏ С„РµРІСЂР°Р»СЏ
 		{
 			mytime.tm_mday = 29;
 		}
 		mktime(&mytime);
 		weekend = mytime.tm_wday;
-		mytime.tm_mday = 1;//меняем на первое число месяца чтобы узнать день недели 1 дня
+		mytime.tm_mday = 1;//РјРµРЅСЏРµРј РЅР° РїРµСЂРІРѕРµ С‡РёСЃР»Рѕ РјРµСЃСЏС†Р° С‡С‚РѕР±С‹ СѓР·РЅР°С‚СЊ РґРµРЅСЊ РЅРµРґРµР»Рё 1 РґРЅСЏ
 		mktime(&mytime);
-		Painting(White, 22, 30, 8, 3);//подложка календарика
+		Painting(White, 22, 30, 8, 3);//РїРѕРґР»РѕР¶РєР° РєР°Р»РµРЅРґР°СЂРёРєР°
 		setColor(Black, White);
 		cal.showMonth(mytime.tm_wday, hand_off);
-		cal.showEvent(8, 26);//вывод событий месяца
-		if (key_first == 0)//когда заходим первый раз всегда напоминание вылазит если уже есть какие то запланированные или пропущенные события
+		cal.showEvent(8, 26);//РІС‹РІРѕРґ СЃРѕР±С‹С‚РёР№ РјРµСЃСЏС†Р°
+		if (key_first == 0)//РєРѕРіРґР° Р·Р°С…РѕРґРёРј РїРµСЂРІС‹Р№ СЂР°Р· РІСЃРµРіРґР° РЅР°РїРѕРјРёРЅР°РЅРёРµ РІС‹Р»Р°Р·РёС‚ РµСЃР»Рё СѓР¶Рµ РµСЃС‚СЊ РєР°РєРёРµ С‚Рѕ Р·Р°РїР»Р°РЅРёСЂРѕРІР°РЅРЅС‹Рµ РёР»Рё РїСЂРѕРїСѓС‰РµРЅРЅС‹Рµ СЃРѕР±С‹С‚РёСЏ
 		{
 			sortVectorData(temp_vector, hand_off, hand_off_time, var, yes_no, size_holidays);
 			key_first = 1;
 		}
 		printStrelka(menu_strelka, index_strelka, 12, 3, 18);
 		key = _getch();
-		switch (key)//листаем месяцы
+		switch (key)//Р»РёСЃС‚Р°РµРј РјРµСЃСЏС†С‹
 		{
 		case Left:
 			index_strelka = 1;
@@ -1230,45 +1230,45 @@ int main() {
 			mytime.tm_mon++;
 			break;
 		case Enter:
-			pos_vector = cal.MoveCursor(mytime.tm_wday, weekend, mytime.tm_mon, hand_off);//вызов курсора
+			pos_vector = cal.MoveCursor(mytime.tm_wday, weekend, mytime.tm_mon, hand_off);//РІС‹Р·РѕРІ РєСѓСЂСЃРѕСЂР°
 			index = choiseMenu(add_dell, 42, 5);
-			if (index == 1)//удаление события
+			if (index == 1)//СѓРґР°Р»РµРЅРёРµ СЃРѕР±С‹С‚РёСЏ
 			{
 				if (!cal.isEmptyEvents(pos_vector))
 				{
 					cal[pos_vector].showDay(44, 10);
 					index_event = choiseDellEvents(cal[pos_vector], ptr);
-					if (cal[pos_vector].getPriorityD(index_event) == 3)//нельзя удалить постоянные праздники
+					if (cal[pos_vector].getPriorityD(index_event) == 3)//РЅРµР»СЊР·СЏ СѓРґР°Р»РёС‚СЊ РїРѕСЃС‚РѕСЏРЅРЅС‹Рµ РїСЂР°Р·РґРЅРёРєРё
 					{
 						setCursor(44, 15);
 						setColor(Black, Yellow);
-						cout << "Нельзя удалить/редактировать!";
+						cout << "РќРµР»СЊР·СЏ СѓРґР°Р»РёС‚СЊ/СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ!";
 						Sleep(1000);
 						Painting(Yellow, 10, 40, 38, 10);
 					}
 					else
 					{
-						cal.dellEvent(pos_vector, index_event);//выбираем событие и удаляем
+						cal.dellEvent(pos_vector, index_event);//РІС‹Р±РёСЂР°РµРј СЃРѕР±С‹С‚РёРµ Рё СѓРґР°Р»СЏРµРј
 						Painting(Yellow, 10, 40, 38, 10);
 						cal[pos_vector].showDay(44, 10);
 					}
 				}
 			}
-			if (index == 0)//добавление события
+			if (index == 0)//РґРѕР±Р°РІР»РµРЅРёРµ СЃРѕР±С‹С‚РёСЏ
 			{
 				Painting(Yellow, 10, 40, 38, 10);
 				index_choice = choiseMenu(choiceEvents, 42, 10);
-				if (index_choice == 0)//выбор стандартных названий или ввод с клавиатуры
+				if (index_choice == 0)//РІС‹Р±РѕСЂ СЃС‚Р°РЅРґР°СЂС‚РЅС‹С… РЅР°Р·РІР°РЅРёР№ РёР»Рё РІРІРѕРґ СЃ РєР»Р°РІРёР°С‚СѓСЂС‹
 				{
-					name_t = "Напоминание";
+					name_t = "РќР°РїРѕРјРёРЅР°РЅРёРµ";
 				}
 				if (index_choice == 1)
 				{
-					name_t = "Встреча";
+					name_t = "Р’СЃС‚СЂРµС‡Р°";
 				}
 				if (index_choice == 2)
 				{
-					name_t = "Событие";
+					name_t = "РЎРѕР±С‹С‚РёРµ";
 				}
 				if (index_choice == 3)
 				{
@@ -1281,31 +1281,31 @@ int main() {
 						{
 							setCursor(58, 13);
 							setColor(Black, Yellow);
-							cout << "Запрещенные символы!";
+							cout << "Р—Р°РїСЂРµС‰РµРЅРЅС‹Рµ СЃРёРјРІРѕР»С‹!";
 							setCursor(58, 14);
-							cout << "Допустимы только буквы";
+							cout << "Р”РѕРїСѓСЃС‚РёРјС‹ С‚РѕР»СЊРєРѕ Р±СѓРєРІС‹";
 							Sleep(1000);
 							Painting(Color(Yellow), 10, 40, 58, 13);
 						}
-					} while (!isNameEvent(name_t));//не разрешит вводить запрещенные символы
-					setNameEvent(name_t);//установка названия события
+					} while (!isNameEvent(name_t));//РЅРµ СЂР°Р·СЂРµС€РёС‚ РІРІРѕРґРёС‚СЊ Р·Р°РїСЂРµС‰РµРЅРЅС‹Рµ СЃРёРјРІРѕР»С‹
+					setNameEvent(name_t);//СѓСЃС‚Р°РЅРѕРІРєР° РЅР°Р·РІР°РЅРёСЏ СЃРѕР±С‹С‚РёСЏ
 				}
 				setTimeEvent(myHour, myMinute, menu_strelka, beg_h, beg_m, end_h, end_m, ptr2);
-				cal.pushEvent(hand_off, pos_vector, name_t, beg_h, beg_m, end_h, end_m);//установка события на дату
+				cal.pushEvent(hand_off, pos_vector, name_t, beg_h, beg_m, end_h, end_m);//СѓСЃС‚Р°РЅРѕРІРєР° СЃРѕР±С‹С‚РёСЏ РЅР° РґР°С‚Сѓ
 			}
-			if (index == 2)//редактирование события, которое уже создано
+			if (index == 2)//СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ СЃРѕР±С‹С‚РёСЏ, РєРѕС‚РѕСЂРѕРµ СѓР¶Рµ СЃРѕР·РґР°РЅРѕ
 			{
 				index_choice = 0;
 				Painting(Color(Yellow), 40, 50, 38, 2);
-				if (cal[pos_vector].getKolEvents() > 0)//заходим если есть события
+				if (cal[pos_vector].getKolEvents() > 0)//Р·Р°С…РѕРґРёРј РµСЃР»Рё РµСЃС‚СЊ СЃРѕР±С‹С‚РёСЏ
 				{
 					cal[pos_vector].showDay(44, 10);
-					index_event = choiseDellEvents(cal[pos_vector], ptr);//вибираем по индексу
+					index_event = choiseDellEvents(cal[pos_vector], ptr);//РІРёР±РёСЂР°РµРј РїРѕ РёРЅРґРµРєСЃСѓ
 					if (cal[pos_vector].getPriorityD(index_event) == 3)
 					{
 						setCursor(44, 15);
 						setColor(Black, Yellow);
-						cout << "Нельзя удалить/редактировать!";
+						cout << "РќРµР»СЊР·СЏ СѓРґР°Р»РёС‚СЊ/СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ!";
 						Sleep(1000);
 						Painting(Yellow, 10, 40, 38, 10);
 					}
@@ -1313,8 +1313,8 @@ int main() {
 					{
 						Painting(Yellow, 30, 50, 40, 10);
 						cal[pos_vector].showEvent(index_event, 42, 10);
-						index_choice = choiseMenu(redaktor, 42, 12);//выбор что мы редактируем либо дату либо название
-						if (index_choice == 0)//редактирование по времени
+						index_choice = choiseMenu(redaktor, 42, 12);//РІС‹Р±РѕСЂ С‡С‚Рѕ РјС‹ СЂРµРґР°РєС‚РёСЂСѓРµРј Р»РёР±Рѕ РґР°С‚Сѓ Р»РёР±Рѕ РЅР°Р·РІР°РЅРёРµ
+						if (index_choice == 0)//СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїРѕ РІСЂРµРјРµРЅРё
 						{
 							setTimeEvent(myHour, myMinute, menu_strelka, beg_h, beg_m, end_h, end_m, ptr2);
 							name_t = cal[pos_vector].getName(index_event);
@@ -1323,7 +1323,7 @@ int main() {
 							Painting(Yellow, 10, 50, 38, 10);
 							cal[pos_vector].showDay(44, 10);
 						}
-						if (index_choice == 1)//редактирование названия
+						if (index_choice == 1)//СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РЅР°Р·РІР°РЅРёСЏ
 						{
 							do
 							{
@@ -1334,9 +1334,9 @@ int main() {
 								{
 									setCursor(62, 13);
 									setColor(Black, Yellow);
-									cout << "Запрещенные символы!";
+									cout << "Р—Р°РїСЂРµС‰РµРЅРЅС‹Рµ СЃРёРјРІРѕР»С‹!";
 									setCursor(62, 14);
-									cout << "Допустимы только буквы";
+									cout << "Р”РѕРїСѓСЃС‚РёРјС‹ С‚РѕР»СЊРєРѕ Р±СѓРєРІС‹";
 									Sleep(1000);
 									Painting(Color(Yellow), 10, 40, 58, 13);
 								}
@@ -1358,13 +1358,13 @@ int main() {
 			break;
 		}
 		Painting(Color(Yellow), 40, 50, 38, 2);
-		cal.pushEvent(all_holidays);//все события отредактированные поступают обратно в общий вектор
+		cal.pushEvent(all_holidays);//РІСЃРµ СЃРѕР±С‹С‚РёСЏ РѕС‚СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРЅС‹Рµ РїРѕСЃС‚СѓРїР°СЋС‚ РѕР±СЂР°С‚РЅРѕ РІ РѕР±С‰РёР№ РІРµРєС‚РѕСЂ
 		mktime(&mytime);
 		cal.clearMonth();
 		Painting(Yellow, 15, 50, 0, 26);
-		cal.showEvent(8, 26);//вывод событий для выбранного месяца после добавления и удаления
+		cal.showEvent(8, 26);//РІС‹РІРѕРґ СЃРѕР±С‹С‚РёР№ РґР»СЏ РІС‹Р±СЂР°РЅРЅРѕРіРѕ РјРµСЃСЏС†Р° РїРѕСЃР»Рµ РґРѕР±Р°РІР»РµРЅРёСЏ Рё СѓРґР°Р»РµРЅРёСЏ
 		ofstream writeEvents(fileName);
-		if (writeEvents.is_open())//перезаписывает все события в файл
+		if (writeEvents.is_open())//РїРµСЂРµР·Р°РїРёСЃС‹РІР°РµС‚ РІСЃРµ СЃРѕР±С‹С‚РёСЏ РІ С„Р°Р№Р»
 		{
 			for (size_t i = 0; i < all_holidays.size(); i++)
 			{
@@ -1376,7 +1376,7 @@ int main() {
 			}
 		}
 		writeEvents.close();
-		changeTime(mytime, hand_off, hand_off_time, all_holidays, var, yes_no, size_holidays);//смена параметров даты и времени для сравнения
+		changeTime(mytime, hand_off, hand_off_time, all_holidays, var, yes_no, size_holidays);//СЃРјРµРЅР° РїР°СЂР°РјРµС‚СЂРѕРІ РґР°С‚С‹ Рё РІСЂРµРјРµРЅРё РґР»СЏ СЃСЂР°РІРЅРµРЅРёСЏ
 	} while (key != esc);
 	setCursor(40, 40);
 }
