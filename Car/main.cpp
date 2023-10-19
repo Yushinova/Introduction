@@ -1,4 +1,4 @@
-#include<iostream>
+п»ї#include<iostream>
 #include<thread>
 #include<chrono>
 #include<Windows.h>
@@ -20,39 +20,39 @@ void setColor(Color text, Color background)
 enum Direction { Up = 72, Left = 75, Right = 77, Down = 80, Spase = 32, Enter = 13, esc = 27 };
 void setCursor(int x, int y)
 {
-	COORD myCoords = { x,y };//инициализируем передаваемыми значениями объект координат
+	COORD myCoords = { x,y };//РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РїРµСЂРµРґР°РІР°РµРјС‹РјРё Р·РЅР°С‡РµРЅРёСЏРјРё РѕР±СЉРµРєС‚ РєРѕРѕСЂРґРёРЅР°С‚
 	SetConsoleCursorPosition(hStdOut, myCoords);
 }
-#define MIN_TANK_VOLUME 35//объем бака
+#define MIN_TANK_VOLUME 35//РѕР±СЉРµРј Р±Р°РєР°
 #define MAX_TANK_VOLUME 160
-#define MIN_TANK_LEVEL 5//миним уровень топлива
-#define MIN_ENGINE_CONSUMPTION 15//потребление на 100км
+#define MIN_TANK_LEVEL 5//РјРёРЅРёРј СѓСЂРѕРІРµРЅСЊ С‚РѕРїР»РёРІР°
+#define MIN_ENGINE_CONSUMPTION 15//РїРѕС‚СЂРµР±Р»РµРЅРёРµ РЅР° 100РєРј
 #define MAX_ENGINE_CONSUMPTION 30
-#define MAX_SPEED_MAX 320//скорость
+#define MAX_SPEED_MAX 320//СЃРєРѕСЂРѕСЃС‚СЊ
 #define MAX_SPEED_MIN 140
-#define MAX_ACCELERATION 40//ускорение
+#define MAX_ACCELERATION 40//СѓСЃРєРѕСЂРµРЅРёРµ
 #define MIN_ACCELERATION 15
 #define MIN_CONSUMPTION 0,003
 class Tank
 {
-	const int VOLUME;//характеристика
-	double fuel_level;//состояние
+	const int VOLUME;//С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєР°
+	double fuel_level;//СЃРѕСЃС‚РѕСЏРЅРёРµ
 public:
 	int get_VOLUME()const
 	{
 		return VOLUME;
 	}
-	double get_fuel_level()const//вернуть уровень топлива
+	double get_fuel_level()const//РІРµСЂРЅСѓС‚СЊ СѓСЂРѕРІРµРЅСЊ С‚РѕРїР»РёРІР°
 	{
 		return fuel_level;
 	}
-	void fill(double fuel)//заправляем бак/бак получает топливо и прибавляем его к нашему уровню/если лить уже не куда уровень равен объему 
+	void fill(double fuel)//Р·Р°РїСЂР°РІР»СЏРµРј Р±Р°Рє/Р±Р°Рє РїРѕР»СѓС‡Р°РµС‚ С‚РѕРїР»РёРІРѕ Рё РїСЂРёР±Р°РІР»СЏРµРј РµРіРѕ Рє РЅР°С€РµРјСѓ СѓСЂРѕРІРЅСЋ/РµСЃР»Рё Р»РёС‚СЊ СѓР¶Рµ РЅРµ РєСѓРґР° СѓСЂРѕРІРµРЅСЊ СЂР°РІРµРЅ РѕР±СЉРµРјСѓ 
 	{
 		if (fuel < 0)return;
 		if (fuel + this->fuel_level > VOLUME)this->fuel_level = VOLUME;
-		else this->fuel_level += fuel;//если место в баке есть то продолжаем заправлять
+		else this->fuel_level += fuel;//РµСЃР»Рё РјРµСЃС‚Рѕ РІ Р±Р°РєРµ РµСЃС‚СЊ С‚Рѕ РїСЂРѕРґРѕР»Р¶Р°РµРј Р·Р°РїСЂР°РІР»СЏС‚СЊ
 	}
-	double give_fuel(double amount)//расходуем топливо сколько попросил двиг/возвращаем уровень который остался в баке
+	double give_fuel(double amount)//СЂР°СЃС…РѕРґСѓРµРј С‚РѕРїР»РёРІРѕ СЃРєРѕР»СЊРєРѕ РїРѕРїСЂРѕСЃРёР» РґРІРёРі/РІРѕР·РІСЂР°С‰Р°РµРј СѓСЂРѕРІРµРЅСЊ РєРѕС‚РѕСЂС‹Р№ РѕСЃС‚Р°Р»СЃСЏ РІ Р±Р°РєРµ
 	{
 		fuel_level -= amount;
 		if (fuel_level < 0)fuel_level = 0;
@@ -61,7 +61,7 @@ public:
 	Tank(int volume) :VOLUME(
 		volume< MIN_TANK_VOLUME ? MIN_TANK_VOLUME :
 		volume>MAX_TANK_VOLUME ? MAX_TANK_VOLUME :
-		volume), fuel_level(0)//инициализация в заголовке и проверка при помощи тернальника
+		volume), fuel_level(0)//РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РІ Р·Р°РіРѕР»РѕРІРєРµ Рё РїСЂРѕРІРµСЂРєР° РїСЂРё РїРѕРјРѕС‰Рё С‚РµСЂРЅР°Р»СЊРЅРёРєР°
 	{
 		/*	cout << "TConstructor\t" << this << endl;*/
 			//if(volume<35)volume=35;
@@ -77,7 +77,7 @@ public:
 		cout << "Volume:\t" << get_VOLUME() << " liters.\n";
 		cout << "Fuel:\t" << get_fuel_level() << " liters.\n";
 	}
-	bool is_fill()//заправлен ли бак
+	bool is_fill()//Р·Р°РїСЂР°РІР»РµРЅ Р»Рё Р±Р°Рє
 	{
 		if (get_fuel_level() > MIN_TANK_LEVEL && get_fuel_level() < VOLUME) return true;
 		else return false;
@@ -114,7 +114,7 @@ public:
 	{
 		return CONSUMPTION;
 	}
-	void start()//либо приходит бул заправлен ли бак//по условию почему то на холостых бенз не тратиться
+	void start()//Р»РёР±Рѕ РїСЂРёС…РѕРґРёС‚ Р±СѓР» Р·Р°РїСЂР°РІР»РµРЅ Р»Рё Р±Р°Рє//РїРѕ СѓСЃР»РѕРІРёСЋ РїРѕС‡РµРјСѓ С‚Рѕ РЅР° С…РѕР»РѕСЃС‚С‹С… Р±РµРЅР· РЅРµ С‚СЂР°С‚РёС‚СЊСЃСЏ
 	{
 		is_started = true;
 	}
@@ -128,9 +128,9 @@ public:
 	}
 	void Info()const
 	{
-		cout << "Расход на 100 км.:  " << CONSUMPTION << " л." << endl;
-		cout << "Расход за 1 секунду: " << consumption_per_second << " л." << endl;
-		cout << "Двигатель " << (is_started ? "ON" : "OFF") << endl;//тернарник
+		cout << "Р Р°СЃС…РѕРґ РЅР° 100 РєРј.:  " << CONSUMPTION << " Р»." << endl;
+		cout << "Р Р°СЃС…РѕРґ Р·Р° 1 СЃРµРєСѓРЅРґСѓ: " << consumption_per_second << " Р»." << endl;
+		cout << "Р”РІРёРіР°С‚РµР»СЊ " << (is_started ? "ON" : "OFF") << endl;//С‚РµСЂРЅР°СЂРЅРёРє
 	}
 };
 class Car
@@ -174,7 +174,7 @@ public:
 	{
 		return speed;
 	}
-	void driver_in()//открываем поток, когда водитель в машине для показа панели
+	void driver_in()//РѕС‚РєСЂС‹РІР°РµРј РїРѕС‚РѕРє, РєРѕРіРґР° РІРѕРґРёС‚РµР»СЊ РІ РјР°С€РёРЅРµ РґР»СЏ РїРѕРєР°Р·Р° РїР°РЅРµР»Рё
 	{
 		driver_inside = true;
 		threads.panel_thread = std::thread(&Car::panel, this);
@@ -184,7 +184,7 @@ public:
 		system("cls");
 		driver_inside = false;
 		if (threads.panel_thread.joinable())threads.panel_thread.join();
-		cout << "Вы вышли! Чтобы заправится нажмите F" << endl;
+		cout << "Р’С‹ РІС‹С€Р»Рё! Р§С‚РѕР±С‹ Р·Р°РїСЂР°РІРёС‚СЃСЏ РЅР°Р¶РјРёС‚Рµ F" << endl;
 		std::this_thread::sleep_for(1s);
 	}
 	void panel()
@@ -192,10 +192,10 @@ public:
 		while (driver_inside)
 		{
 			system("cls");
-			cout << "Вы в машине! Чтобы завести I/поехать Up/тормозить Down/выйти Enter" << endl;
-			cout << "Уровень топлива: " << tank.get_fuel_level() << " литров" << endl;
-			cout << "Двигатель: " << (engine.started() ? "ВКЛЮЧЕН" : "ВЫКЛЮЧЕН") << endl;
-			cout << "Скорость: " << speed << " км/ч" << endl;
+			cout << "Р’С‹ РІ РјР°С€РёРЅРµ! Р§С‚РѕР±С‹ Р·Р°РІРµСЃС‚Рё I/РїРѕРµС…Р°С‚СЊ Up/С‚РѕСЂРјРѕР·РёС‚СЊ Down/РІС‹Р№С‚Рё Enter" << endl;
+			cout << "РЈСЂРѕРІРµРЅСЊ С‚РѕРїР»РёРІР°: " << tank.get_fuel_level() << " Р»РёС‚СЂРѕРІ" << endl;
+			cout << "Р”РІРёРіР°С‚РµР»СЊ: " << (engine.started() ? "Р’РљР›Р®Р§Р•Рќ" : "Р’Р«РљР›Р®Р§Р•Рќ") << endl;
+			cout << "РЎРєРѕСЂРѕСЃС‚СЊ: " << speed << " РєРј/С‡" << endl;
 			alarm();
 			std::this_thread::sleep_for(1s);
 		}
@@ -213,8 +213,8 @@ public:
 		}
 		mtx.unlock();
 	}
-	//завести машину
-	void idle_car()//при запуске расходуется только минимальное количество
+	//Р·Р°РІРµСЃС‚Рё РјР°С€РёРЅСѓ
+	void idle_car()//РїСЂРё Р·Р°РїСѓСЃРєРµ СЂР°СЃС…РѕРґСѓРµС‚СЃСЏ С‚РѕР»СЊРєРѕ РјРёРЅРёРјР°Р»СЊРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ
 	{
 		while (engine.started() && tank.give_fuel(engine.get_consuption_per_second()))
 		{
@@ -222,7 +222,7 @@ public:
 			std::this_thread::sleep_for(1s);
 		}
 	}
-	double consuption_per_second(int speed)//расход от скорости
+	double consuption_per_second(int speed)//СЂР°СЃС…РѕРґ РѕС‚ СЃРєРѕСЂРѕСЃС‚Рё
 	{
 		if (speed >= 1 && speed <= 60) return 0.0020;
 		if (speed >= 61 && speed <= 100) return 0.0014;
@@ -245,7 +245,7 @@ public:
 	{
 		speed -= ACCELERATION;
 		if (speed < 1)speed = 0;
-		tank.give_fuel(consuption_per_second(speed));//тратится минимальное значение
+		tank.give_fuel(consuption_per_second(speed));//С‚СЂР°С‚РёС‚СЃСЏ РјРёРЅРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ
 		std::this_thread::sleep_for(1s);
 		threads.friction_force = std::thread(&Car::friction, this);
 		if (threads.friction_force.joinable())threads.friction_force.detach();
@@ -255,53 +255,53 @@ public:
 		engine.stop();
 		if (threads.idle_thread.joinable())threads.idle_thread.join();
 	}
-	void start_car()//открываем поток для старта машины, чтобы списывалось топливо, пока заведена
+	void start_car()//РѕС‚РєСЂС‹РІР°РµРј РїРѕС‚РѕРє РґР»СЏ СЃС‚Р°СЂС‚Р° РјР°С€РёРЅС‹, С‡С‚РѕР±С‹ СЃРїРёСЃС‹РІР°Р»РѕСЃСЊ С‚РѕРїР»РёРІРѕ, РїРѕРєР° Р·Р°РІРµРґРµРЅР°
 	{
 		engine.start();
 		threads.idle_thread = std::thread(&Car::idle_car, this);
 	}
-	void alarm()//мигалочка
+	void alarm()//РјРёРіР°Р»РѕС‡РєР°
 	{
-		if (!tank.is_fill()) cout << "Низкий уровень топлива!!!!!!!" << endl;
+		if (!tank.is_fill()) cout << "РќРёР·РєРёР№ СѓСЂРѕРІРµРЅСЊ С‚РѕРїР»РёРІР°!!!!!!!" << endl;
 	}
-	void car_brain()//управление машиной
+	void car_brain()//СѓРїСЂР°РІР»РµРЅРёРµ РјР°С€РёРЅРѕР№
 	{
 		char key = 0;
 		bool Stop = false;
 		do
 		{
-			if (_kbhit)//выполняетс выбранное действие, пока не нажмем другое
-			key = _getch();//передаем управление для нажатия
+			if (_kbhit)//РІС‹РїРѕР»РЅСЏРµС‚СЃ РІС‹Р±СЂР°РЅРЅРѕРµ РґРµР№СЃС‚РІРёРµ, РїРѕРєР° РЅРµ РЅР°Р¶РјРµРј РґСЂСѓРіРѕРµ
+			key = _getch();//РїРµСЂРµРґР°РµРј СѓРїСЂР°РІР»РµРЅРёРµ РґР»СЏ РЅР°Р¶Р°С‚РёСЏ
 			switch (key)
 			{
-			case Enter:if (!engine.started()) driver_inside ? driver_out() : driver_in();//выпрыгивать на ходу не будем)) не едем переделать!
+			case Enter:if (!engine.started()) driver_inside ? driver_out() : driver_in();//РІС‹РїСЂС‹РіРёРІР°С‚СЊ РЅР° С…РѕРґСѓ РЅРµ Р±СѓРґРµРј)) РЅРµ РµРґРµРј РїРµСЂРµРґРµР»Р°С‚СЊ!
 				break;
-			case 'F'://заправляем
+			case 'F'://Р·Р°РїСЂР°РІР»СЏРµРј
 			case 'f':
-				if (driver_inside)//если машина не заведена и водитель вышел, заправляем
+				if (driver_inside)//РµСЃР»Рё РјР°С€РёРЅР° РЅРµ Р·Р°РІРµРґРµРЅР° Рё РІРѕРґРёС‚РµР»СЊ РІС‹С€РµР», Р·Р°РїСЂР°РІР»СЏРµРј
 				{
-					cout << "Нужно выйти из машины!" << endl;
+					cout << "РќСѓР¶РЅРѕ РІС‹Р№С‚Рё РёР· РјР°С€РёРЅС‹!" << endl;
 					break;
 				}
 				double kol_fuel;
-				cout << "Заправляю: "; cin >> kol_fuel;
+				cout << "Р—Р°РїСЂР°РІР»СЏСЋ: "; cin >> kol_fuel;
 				tank.fill(kol_fuel);
 				break;
-			case 'I'://зажигание
+			case 'I'://Р·Р°Р¶РёРіР°РЅРёРµ
 			case 'i':
 				if (driver_inside && speed == 0)
 				{
 					engine.started() ? stop_car() : start_car();
 				}
 				break;
-			case esc://выключаем и выходим
+			case esc://РІС‹РєР»СЋС‡Р°РµРј Рё РІС‹С…РѕРґРёРј
 				if (speed == 0 && !engine.started())
 				{
 					driver_out();
 					cout << "Bye!" << endl;
 					Stop = true;
 				}
-				else cout << "Вы должны остановиться и выключить зажигание!" << endl;
+				else cout << "Р’С‹ РґРѕР»Р¶РЅС‹ РѕСЃС‚Р°РЅРѕРІРёС‚СЊСЃСЏ Рё РІС‹РєР»СЋС‡РёС‚СЊ Р·Р°Р¶РёРіР°РЅРёРµ!" << endl;
 				std::this_thread::sleep_for(1s);
 				break;
 				}
@@ -338,10 +338,10 @@ public:
 	{
 		setlocale(LC_ALL, "");
 #ifdef TANK_CHECK
-		Tank tank(20);//задефайнили бак
+		Tank tank(20);//Р·Р°РґРµС„Р°Р№РЅРёР»Рё Р±Р°Рє
 #endif // TANK_CHECK
 #ifdef ENGINE_CHECK
-		Engine engine(15);//задефайнили движок
+		Engine engine(15);//Р·Р°РґРµС„Р°Р№РЅРёР»Рё РґРІРёР¶РѕРє
 #endif // ENGINE_CHECK
 		Car car(tank, engine);
 		car.car_brain();
