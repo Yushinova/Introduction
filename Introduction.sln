@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Organizer", "Organizer\Orga
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Figure", "Figure\Figure.vcxproj", "{A9ED4CC5-E48C-43DC-808A-CF700C60DB6C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lambdas", "Lambdas\Lambdas.vcxproj", "{71BCAA62-C3C3-4567-BD54-7FB561F86D3F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -61,6 +63,14 @@ Global
 		{A9ED4CC5-E48C-43DC-808A-CF700C60DB6C}.Release|x64.Build.0 = Release|x64
 		{A9ED4CC5-E48C-43DC-808A-CF700C60DB6C}.Release|x86.ActiveCfg = Release|Win32
 		{A9ED4CC5-E48C-43DC-808A-CF700C60DB6C}.Release|x86.Build.0 = Release|Win32
+		{71BCAA62-C3C3-4567-BD54-7FB561F86D3F}.Debug|x64.ActiveCfg = Debug|x64
+		{71BCAA62-C3C3-4567-BD54-7FB561F86D3F}.Debug|x64.Build.0 = Debug|x64
+		{71BCAA62-C3C3-4567-BD54-7FB561F86D3F}.Debug|x86.ActiveCfg = Debug|Win32
+		{71BCAA62-C3C3-4567-BD54-7FB561F86D3F}.Debug|x86.Build.0 = Debug|Win32
+		{71BCAA62-C3C3-4567-BD54-7FB561F86D3F}.Release|x64.ActiveCfg = Release|x64
+		{71BCAA62-C3C3-4567-BD54-7FB561F86D3F}.Release|x64.Build.0 = Release|x64
+		{71BCAA62-C3C3-4567-BD54-7FB561F86D3F}.Release|x86.ActiveCfg = Release|Win32
+		{71BCAA62-C3C3-4567-BD54-7FB561F86D3F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
